@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Questionnaire Form</title>
+
+    <link rel="stylesheet" href="index.css">
+    <!-- Import Inter font from Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.css">
+    <!-- Import Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+    apiKey: "AIzaSyCpVlceZdzdxbe0kckQtkSin53xQijrtjs",
+    authDomain: "codegrid-d9bd5.firebaseapp.com",
+    projectId: "codegrid-d9bd5",
+    storageBucket: "codegrid-d9bd5.firebasestorage.app",
+    messagingSenderId: "190980241132",
+    appId: "1:190980241132:web:38d9281c43cc3e36a217c9",
+    measurementId: "G-M3Y4787QME"
+  };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Make Firebase available globally
+        window.db = db;
+        window.addDoc = addDoc;
+        window.collection = collection;
+        window.serverTimestamp = serverTimestamp;
+    </script>
+
+</head>
+<body>
+    <button class="theme-toggle" id="theme-toggle">
+        <i class="fas fa-sun"></i>
+        
+    </button>
+    <div class="container">
+        <div class="header">
+            <h1>Got any issue you faced before?</h1>
+            <h2>We'd like your feedback. </h2>
+            <p>Please fill out the form below to help us understand any issue you have ever encountered since joining Walter Sisulu University and provide your opinion on how we can approach that issue. Your feedback is valuable to us and will help us improve our services.</p>
+        </div>
+
+        <div class="cta-button">
+            <button id="help-button">Need Help?</button>
+        </div>
+
+        <form id="questionnaire-form">
+            <div class="form-container">
+                <div class="form-item" id="name-item">
+                    <div class="form-question">
+                        <label for="name">What's your name?<span class="required">*</span></label>
+                    </div>
+                    <input type="text" id="name" class="form-input" placeholder="Your full name">
+                    <div class="error-message">Please enter your name</div>
+                </div>
+                <div class="form-item" id="name-item">
+                    <div class="form-question">
+                        <label for="name">Please enter your student number.<span class="required">*</span></label>
+                    </div>
+                    <input type="text" id="student-number" class="form-input" placeholder="Your student number">
+                    <div class="error-message">Please enter your student number.</div>
+                </div>
+
+                <div class="form-item" id="email-item">
+                    <div class="form-question">
+                        <label for="email">What's your email address?<span class="required">*</span></label>
+                    </div>
+                    <input type="email" id="email" class="form-input" placeholder="your.email@example.com">
+                    <div class="error-message">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-item" id="service-item">
+                    <div class="form-question">
+                        <label>Which service are you interested in?<span class="required">*</span></label>
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="off-menu" name="service" value="Off Menu">
+                            <label for="off-menu" class="radio-label">Off Menu Delivery</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a-la-carte" name="service" value="A La Carte">
+                            <label for="a-la-carte" class="radio-label">A La Carte Subscription</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="full-time" name="service" value="Full Time">
+                            <label for="full-time" class="radio-label">Full-Time Designer</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="not-sure" name="service" value="Not Sure">
+                            <label for="not-sure" class="radio-label">Not Sure Yet</label>
+                        </div>
+                    </div>
+                    <div class="error-message">Please select a service</div>
+                </div>
+
+                <div class="form-item" id="budget-item">
+                    <div class="form-question">
+                        <label for="budget">What's your monthly design budget?<span class="required">*</span></label>
+                    </div>
+                    <select id="budget" class="form-input">
+                        <option value="" disabled selected>Select your budget range</option>
+                        <option value="Less than $1,000">Less than $1,000</option>
+                        <option value="$1,000 - $3,000">$1,000 - $3,000</option>
+                        <option value="$3,000 - $5,000">$3,000 - $5,000</option>
+                        <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                        <option value="$10,000+">$10,000+</option>
+                    </select>
+                    <div class="error-message">Please select your budget range</div>
+                </div>
+
+                <div class="form-item" id="needs-item">
+                    <div class="form-question">
+                        <label>What are your design needs?<span class="required">*</span></label>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="web-design" name="needs" value="Web Design">
+                            <label for="web-design" class="checkbox-label">Web Design</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="branding" name="needs" value="Branding">
+                            <label for="branding" class="checkbox-label">Branding</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="ui-ux" name="needs" value="UI/UX">
+                            <label for="ui-ux" class="checkbox-label">UI/UX Design</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="print" name="needs" value="Print">
+                            <label for="print" class="checkbox-label">Print Materials</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="social-media" name="needs" value="Social Media">
+                            <label for="social-media" class="checkbox-label">Social Media Graphics</label>
+                        </div>
+                    </div>
+                    <div class="error-message">Please select at least one design need</div>
+                </div>
+
+                <div class="form-item" id="timeline-item">
+                    <div class="form-question">
+                        <label for="timeline">What's your project timeline?<span class="required">*</span></label>
+                    </div>
+                    <select id="timeline" class="form-input">
+                        <option value="" disabled selected>Select your timeline</option>
+                        <option value="ASAP">ASAP</option>
+                        <option value="Within 2 weeks">Within 2 weeks</option>
+                        <option value="Within a month">Within a month</option>
+                        <option value="Within 3 months">Within 3 months</option>
+                        <option value="Flexible">Flexible</option>
+                    </select>
+                    <div class="error-message">Please select your timeline</div>
+                </div>
+
+                <div class="form-item" id="calls-item">
+                    <div class="form-question">
+                        <label>Would you like to schedule a call with our team?<span class="required">*</span></label>
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="call-yes" name="call" value="Yes">
+                            <label for="call-yes" class="radio-label">Yes, I'd like to schedule a call</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="call-no" name="call" value="No">
+                            <label for="call-no" class="radio-label">No, email is fine for now</label>
+                        </div>
+                    </div>
+                    <div class="error-message">Please select an option</div>
+                </div>
+
+                <div class="form-item" id="message-item">
+                    <div class="form-question">
+                        <label for="message">Additional information or questions?<span class="required">*</span></label>
+                    </div>
+                    <textarea id="message" class="form-input" placeholder="Tell us more about your project or any questions you have..."></textarea>
+                    <div class="error-message">Please provide some additional information</div>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="submit-button">Submit Questionnaire</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="thank-you" id="thank-you-message">
+            <h2>Thank you for your submission!</h2>
+            <p>We've received your questionnaire responses and will get back to you shortly.</p>
+        </div>
+
+        <div class="privacy-notice">
+            <h3>Privacy Notice</h3>
+            <p>Your privacy is important to us. Please note that:</p>
+            <p>• All submitted information will be retained until <span class="highlight">September 1, 2025</span></p>
+            <p>• Data will be automatically deleted on <span class="highlight">September 2, 2025</span></p>
+            <p>• This policy ensures your information is only kept for the necessary duration</p>
+            <p>• You can request early deletion of your data by contacting our support team</p>
+        </div>
+
+        <footer class="footer">
+            <p>© 2024 Walter Sisulu University. All rights reserved.</p>
+            <p><a href="https://firebase.com" target="_blank" class="supabase-credit" style="display: inline-flex; align-items: center; gap: 8px; color: #FFCA28; text-decoration: none; font-weight: 500; padding: 4px 8px; border-radius: 4px; transition: all 0.2s ease;">
+                <img src="https://www.gstatic.com/mobilesdk/240501_mobilesdk/firebase_28dp.png" alt="Firebase" style="height: 24px; width: auto; vertical-align: middle; filter: brightness(0.9);"> Firebase
+            </a></p>
+            <p>For technical support, contact: langamitch69@gmail.com</p>
+        </footer>
+    </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
