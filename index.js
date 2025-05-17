@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Validate student number
         const studentnumberInput = document.getElementById('student-number');
         if (!studentnumberInput.value.trim()) {
-            document.getElementById('name-item').classList.add('error');
+            document.getElementById('student-number-item').classList.add('error');
             isValid = false;
         }
         
