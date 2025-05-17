@@ -53,6 +53,12 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('name-item').classList.add('error');
             isValid = false;
         }
+        // Validate student number
+        const studentnumberInput = document.getElementById('student-number');
+        if (!nameInput.value.trim()) {
+            document.getElementById('name-item').classList.add('error');
+            isValid = false;
+        }
         
         // Validate email
         const emailInput = document.getElementById('email');
