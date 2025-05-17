@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('questionnaire-form');
     const thankYouMessage = document.getElementById('thank-you-message');
@@ -55,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         // Validate student number
         const studentnumberInput = document.getElementById('student-number');
-        if (!nameInput.value.trim()) {
+        if (!studentnumberInput.value.trim()) {
             document.getElementById('name-item').classList.add('error');
             isValid = false;
         }
