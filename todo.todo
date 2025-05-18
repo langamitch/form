@@ -1,0 +1,15 @@
+task 1
+✔ Add dark mode icon toggle functionality @done(25-05-17 14:58)
+✔ Style the form inputs for dark mode @done(25-05-17 14:58)
+✔ Add form validation for all required fields @done(25-05-17 14:58)
+✔ Implement Firebase data submission @done(25-05-17 14:58)
+- Add loading state while submitting
+- Add error handling for failed submissions
+✔ Make form mobile responsive @done(25-05-17 14:59)
+✔ Add success message animation @done(25-05-17 14:59)
+✔ Test cross-browser compatibility @done(25-05-17 14:59)
+- Implement email notifications for new submissions
+- Add data export functionality
+- Create admin dashboard for viewing submissions
+
+Archive:

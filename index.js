@@ -52,72 +52,81 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('name-item').classList.add('error');
             isValid = false;
         }
+        
         // Validate student number
-        const studentnumberInput = document.getElementById('student-number');
-        if (!studentnumberInput.value.trim()) {
+        const studentNumberInput = document.getElementById('student-number');
+        if (!studentNumberInput.value.trim()) {
             document.getElementById('student-number-item').classList.add('error');
             isValid = false;
         }
         
-        // Validate email
-        const emailInput = document.getElementById('email');
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(emailInput.value.trim())) {
-            document.getElementById('email-item').classList.add('error');
+        // Validate year
+        const yearSelected = document.querySelector('input[name="year"]:checked');
+        if (!yearSelected) {
+            document.getElementById('year-item').classList.add('error');
             isValid = false;
         }
         
-        // Validate service selection
-        const serviceRadios = document.querySelectorAll('input[name="service"]');
-        let serviceSelected = false;
-        serviceRadios.forEach(radio => {
-            if (radio.checked) serviceSelected = true;
-        });
-        if (!serviceSelected) {
-            document.getElementById('service-item').classList.add('error');
+        // Validate course
+        const courseSelected = document.querySelector('input[name="faculty"]:checked');
+        if (!courseSelected) {
+            document.getElementById('faculty-item').classList.add('error');
             isValid = false;
         }
         
-        // Validate budget selection
-        const budgetSelect = document.getElementById('budget');
-        if (!budgetSelect.value) {
-            document.getElementById('budget-item').classList.add('error');
+        // Validate problems
+        const problemsInput = document.getElementById('problems');
+        if (!problemsInput.value.trim()) {
+            document.getElementById('problems-item').classList.add('error');
             isValid = false;
         }
         
-        // Validate design needs
-        const needsCheckboxes = document.querySelectorAll('input[name="needs"]');
-        let needsSelected = false;
-        needsCheckboxes.forEach(checkbox => {
-            if (checkbox.checked) needsSelected = true;
-        });
-        if (!needsSelected) {
-            document.getElementById('needs-item').classList.add('error');
+        // Validate access difficulties
+        const accessSelected = document.querySelectorAll('input[name="access"]:checked');
+        if (accessSelected.length === 0) {
+            document.getElementById('access-difficulties-item').classList.add('error');
             isValid = false;
         }
         
-        // Validate timeline selection
-        const timelineSelect = document.getElementById('timeline');
-        if (!timelineSelect.value) {
-            document.getElementById('timeline-item').classList.add('error');
+        // Validate difficulty causes
+        const causesSelected = document.querySelectorAll('input[name="causes"]:checked');
+        if (causesSelected.length === 0) {
+            document.getElementById('difficulty-causes-item').classList.add('error');
             isValid = false;
         }
         
-        // Validate call preference
-        const callRadios = document.querySelectorAll('input[name="call"]');
-        let callSelected = false;
-        callRadios.forEach(radio => {
-            if (radio.checked) callSelected = true;
-        });
-        if (!callSelected) {
-            document.getElementById('calls-item').classList.add('error');
+        // Validate smartphone usage
+        const smartphoneUsageSelected = document.querySelector('input[name="smartphone-usage"]:checked');
+        if (!smartphoneUsageSelected) {
+            document.getElementById('smartphone-usage-item').classList.add('error');
             isValid = false;
         }
         
-        // Validate message
-        const messageInput = document.getElementById('message');
-        if (!messageInput.value.trim()) {
-            document.getElementById('message-item').classList.add('error');
+        // Validate app help
+        const appHelpSelected = document.querySelector('input[name="app-help"]:checked');
+        if (!appHelpSelected) {
+            document.getElementById('app-help-item').classList.add('error');
+            isValid = false;
+        }
+        
+        // Validate digital tasks
+        const digitalTasksInput = document.getElementById('digital-tasks');
+        if (!digitalTasksInput.value.trim()) {
+            document.getElementById('digital-tasks-item').classList.add('error');
+            isValid = false;
+        }
+        
+        // Validate testing willingness
+        const testingWillingnessSelected = document.querySelector('input[name="testing-willingness"]:checked');
+        if (!testingWillingnessSelected) {
+            document.getElementById('testing-willingness-item').classList.add('error');
+            isValid = false;
+        }
+        
+        // Validate suggestions
+        const suggestionsInput = document.getElementById('suggestions');
+        if (!suggestionsInput.value.trim()) {
+            document.getElementById('suggestions-item').classList.add('error');
             isValid = false;
         }
         
@@ -126,19 +135,41 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 // Prepare form data
                 const formData = {
-                    name: nameInput.value,
-                    email: emailInput.value,
-                    service: document.querySelector('input[name="service"]:checked').value,
-                    budget: budgetSelect.value,
-                    needs: Array.from(document.querySelectorAll('input[name="needs"]:checked')).map(cb => cb.value),
-                    timeline: timelineSelect.value,
-                    call: document.querySelector('input[name="call"]:checked').value,
-                    message: messageInput.value,
+                    // Section A: General Student Experience
+                    name: document.getElementById('name').value,
+                    studentNumber: document.getElementById('student-number').value,
+                    year: document.querySelector('input[name="year"]:checked')?.value,
+                    course: document.querySelector('input[name="faculty"]:checked')?.value,
+                    courseOther: document.getElementById('faculty-other-text')?.value,
+                    problems: document.getElementById('problems').value,
+
+                    // Section B: Access & Campus Services
+                    accessDifficulties: Array.from(document.querySelectorAll('input[name="access"]:checked')).map(cb => cb.value),
+                    accessOther: document.getElementById('access-other-text')?.value,
+                    difficultyCauses: Array.from(document.querySelectorAll('input[name="causes"]:checked')).map(cb => cb.value),
+                    causesOther: document.getElementById('cause-other-text')?.value,
+
+                    // Section C: Technology on Campus
+                    smartphoneUsage: document.querySelector('input[name="smartphone-usage"]:checked')?.value,
+                    appHelp: document.querySelector('input[name="app-help"]:checked')?.value,
+                    appHelpDetails: document.getElementById('app-help-details')?.value,
+                    digitalTasks: document.getElementById('digital-tasks')?.value,
+
+                    // Section D: Willingness to Engage
+                    testingWillingness: document.querySelector('input[name="testing-willingness"]:checked')?.value,
+                    suggestions: document.getElementById('suggestions')?.value,
+
+                    // Timestamp
                     submittedAt: serverTimestamp()
                 };
 
+                console.log('Form data prepared:', formData);
+                console.log('Firebase db object:', db);
+                console.log('Firebase functions available:', { addDoc, collection, serverTimestamp });
+
                 // Save to Firebase
-                await addDoc(collection(db, 'form-submissions'), formData);
+                const docRef = await addDoc(collection(db, 'form-submissions'), formData);
+                console.log('Document written with ID:', docRef.id);
                 
                 // Hide the form and show thank you message
                 form.style.display = 'none';
@@ -150,8 +181,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Reset form
                 form.reset();
             } catch (error) {
-                console.error('Error submitting form:', error);
-                alert('There was an error submitting your form. Please try again later.');
+                console.error('Detailed error information:', {
+                    message: error.message,
+                    code: error.code,
+                    stack: error.stack
+                });
+                alert(`Error submitting form: ${error.message}. Please check the console for more details.`);
             }
         } else {
             // Scroll to the first error
@@ -161,4 +196,57 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // --- Profile Dropdown & Firebase Auth ---
+    const profileIcon = document.getElementById('profile-icon');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    const profileName = document.getElementById('profile-name');
+    const profileEmail = document.getElementById('profile-email');
+    const profilePhoto = document.getElementById('profile-photo');
+    const signInBtn = document.getElementById('sign-in-btn');
+    const signOutBtn = document.getElementById('sign-out-btn');
+
+    let auth, provider;
+    if (window.firebase && window.firebase.auth) {
+        auth = window.firebase.auth();
+        provider = new window.firebase.auth.GoogleAuthProvider();
+    } else if (window.getAuth) {
+        auth = getAuth();
+        provider = new GoogleAuthProvider();
+    }
+
+    function showDropdown(show) {
+        profileDropdown.style.display = show ? 'block' : 'none';
+    }
+    profileIcon.addEventListener('click', function(e) {
+        e.stopPropagation();
+        showDropdown(profileDropdown.style.display !== 'block');
+    });
+    document.addEventListener('click', function() {
+        showDropdown(false);
+    });
+
+    if (auth) {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                profileName.textContent = user.displayName || 'No Name';
+                profileEmail.textContent = user.email;
+                profilePhoto.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName||'User')}`;
+                signInBtn.style.display = 'none';
+                signOutBtn.style.display = 'block';
+            } else {
+                profileName.textContent = 'Guest';
+                profileEmail.textContent = 'Not signed in';
+                profilePhoto.src = 'https://ui-avatars.com/api/?name=User';
+                signInBtn.style.display = 'block';
+                signOutBtn.style.display = 'none';
+            }
+        });
+        signInBtn.addEventListener('click', function() {
+            signInWithPopup(auth, provider);
+        });
+        signOutBtn.addEventListener('click', function() {
+            signOut(auth);
+        });
+    }
 });

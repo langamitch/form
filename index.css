@@ -34,8 +34,10 @@ body.dark-theme {
 }
 
 .header h2 {
-    font-size: 36px;
+    font-size: 26px;
     font-weight: 400;
+    margin-bottom: 20px;
+    margin-top: 10px;
     color: #333;
 }
 
@@ -85,7 +87,9 @@ body.dark-theme {
     color: #333;
     margin-bottom: 15px;
 }
-
+.section-title{
+    display:none;
+}
 .required {
     color: #ff3860;
     margin-left: 5px;
